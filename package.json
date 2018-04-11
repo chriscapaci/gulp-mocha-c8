@@ -1,0 +1,85 @@
+{
+    "name": "gulp-mocha-c8",
+    "version": "1.0.0",
+    "description": "Gulp plugin for c8 and mocha to get code coverage on tests run through v8.",
+    "license": "MIT",
+    "keywords": [
+        "gulpplugin",
+        "c8",
+        "codecoverage",
+        "v8"
+    ],
+    "homepage": "https://github.com/chriscapaci/gulp-mocha-c8",
+    "bugs": "https://github.com/chriscapaci/gulp-mocha-c8/issues",
+    "author": {
+        "name": "Chris Capaci",
+        "email": "chris.capaci@gmail.com",
+        "url": "https://github.com/chriscapaci"
+    },
+    "main": "./lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/chriscapaci/gulp-mocha-c8.git"
+    },
+    "dependencies": {
+        "c8": "2.0.0",
+        "mocha": "5.0.5",
+        "plugin-error": "1.0.1",
+        "dargs": "5.1.0",
+        "execa": "0.10.0",
+        "npm-run-path": "2.0.2",
+        "through2": "2.0.3"
+    },
+    "devDependencies": {
+        "mocha": "5.0.5",
+        "eslint": "4.19.1",
+        "vinyl": "2.1.0",
+        "gulp": "3.9.1",
+        "gulp-eslint": "4.0.2",
+        "gulp-mocha": "5.0.0",
+        "gulp-ava": "0.19.0",
+        "ava": "0.25.0",
+        "p-event": "1.3.0",
+        "run-sequence": "2.2.1",
+        "rimraf": "2.6.2",
+        "tmp": "0.0.33"
+    },
+    "scripts": {
+        "test": "node_modules/.bin/gulp test",
+        "lint": "node_modules/.bin/gulp lint"
+    },
+    "eslintConfig": {
+        "parserOptions": {
+            "ecmaVersion": 8,
+            "impliedStrict": true,
+            "sourceType": "module"
+        },
+        "rules": {
+            "indent": [
+                "error",
+                4,
+                {
+                    "SwitchCase": 1
+                }
+            ],
+            "curly": "error",
+            "brace-style": [
+                "error",
+                "1tbs"
+            ],
+            "semi": [
+                "error",
+                "always"
+            ],
+            "no-extra-semi": "error",
+            "no-unreachable": "error",
+            "eqeqeq": "error",
+            "default-case": "error",
+            "no-alert": "error",
+            "no-unused-labels": "error"
+        }
+    }
+}
