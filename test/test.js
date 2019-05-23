@@ -17,25 +17,25 @@ function fixture(name) {
 }
 
 test('run unit test and pass', async t => {
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { coverageDirectory: tmp.dirSync().name, reporter: 'none' } });
+    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
     const result = pEvent(stream, '_result');
     stream.end(fixture('fixture-pass.js'));
     t.regex((await result).stdout, /1 passing/);
 });
 
 test('run unit test and fail', async t => {
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { coverageDirectory: tmp.dirSync().name, reporter: 'none' } });
+    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
     const error = pEvent(stream, 'error');
     stream.end(fixture('fixture-fail.js'));
     t.regex((await error).stdout, /1 failing/);
 });
 
 test('pass async AssertionError to mocha', async t => {
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { coverageDirectory: tmp.dirSync().name, reporter: 'none' } });
+    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
     const event = pEvent(stream, 'error');
     stream.end(fixture('fixture-async.js'));
     const error = await event;
-    t.regex(error.stdout, /throws after timeout|Uncaught AssertionError.*: false == true/);
+    t.regex(error.stdout, /throws after timeout|Uncaught AssertionError.*: The expression evaluated to a falsy value/);
 });
 
 test('require two files', async t => {
@@ -48,7 +48,7 @@ test('require two files', async t => {
             ]
         }, c8Opts: { 
             reporter: 'none',
-            coverageDirectory: tmp.dirSync().name
+            'temp-directory': tmp.dirSync().name
         } 
     });
     const result = pEvent(stream, '_result');
@@ -58,7 +58,7 @@ test('require two files', async t => {
 
 test('run unit test and assert coverage is generated', async t => {
     const tmpDir = tmp.dirSync();
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { coverageDirectory: tmpDir.name, reporter: 'json', exclude: "\\!test/fixtures/testlib/*" } });
+    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmpDir.name, reporter: 'json', exclude: "\\!test/fixtures/testlib/*" } });
     const result = pEvent(stream, '_result');
     stream.end(fixture('fixture-coverage.js'));
     t.regex((await result).stdout, /1 passing/);

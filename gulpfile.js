@@ -13,16 +13,9 @@ gulp.task('lint', function () {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('test', function (cb) {
-    runSequence('test-tests', 'test-utils', cb);
-});
-
 gulp.task('test-tests', function () {
-    return gulp.src(['./test/tests.js'])
+    return gulp.src(['./test/test.js'])
         .pipe(ava());
 });
 
-gulp.task('test-utils', function () {
-    return gulp.src(['./test/utils.js'])
-        .pipe(ava());
-});
+gulp.task('test', gulp.series('test-tests'));
