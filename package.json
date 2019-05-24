@@ -1,6 +1,6 @@
 {
     "name": "gulp-mocha-c8",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Gulp plugin for c8 and mocha to get code coverage on tests run through v8.",
     "license": "MIT",
     "keywords": [
@@ -25,7 +25,7 @@
         "url": "git://github.com/chriscapaci/gulp-mocha-c8.git"
     },
     "dependencies": {
-        "c8": "4.1.5",
+        "c8": "5.0.1",
         "mocha": "5.0.5",
         "plugin-error": "1.0.1",
         "dargs": "5.1.0",
