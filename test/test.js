@@ -17,21 +17,21 @@ function fixture(name) {
 }
 
 test('run unit test and pass', async t => {
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
+    const stream = mochaC8({ mochaOpts: {}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
     const result = pEvent(stream, '_result');
     stream.end(fixture('fixture-pass.js'));
     t.regex((await result).stdout, /1 passing/);
 });
 
 test('run unit test and fail', async t => {
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
+    const stream = mochaC8({ mochaOpts: {}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
     const error = pEvent(stream, 'error');
     stream.end(fixture('fixture-fail.js'));
     t.regex((await error).stdout, /1 failing/);
 });
 
 test('pass async AssertionError to mocha', async t => {
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
+    const stream = mochaC8({ mochaOpts: {}, c8Opts: { 'temp-directory': tmp.dirSync().name, reporter: 'none' } });
     const event = pEvent(stream, 'error');
     stream.end(fixture('fixture-async.js'));
     const error = await event;
@@ -41,7 +41,6 @@ test('pass async AssertionError to mocha', async t => {
 test('require two files', async t => {
     const stream = mochaC8({ 
         mochaOpts: {
-            suppress: true,
             require: [
                 'test/fixtures/fixture-require1.js',
                 'test/fixtures/fixture-require2.js'
@@ -58,7 +57,7 @@ test('require two files', async t => {
 
 test('run unit test and assert coverage is generated', async t => {
     const tmpDir = tmp.dirSync();
-    const stream = mochaC8({ mochaOpts: {suppress: true}, c8Opts: { 'temp-directory': tmpDir.name, reporter: 'json', exclude: "\\!test/fixtures/testlib/*" } });
+    const stream = mochaC8({ mochaOpts: {}, c8Opts: { 'temp-directory': tmpDir.name, reporter: 'json', exclude: "\\!test/fixtures/testlib/*" } });
     const result = pEvent(stream, '_result');
     stream.end(fixture('fixture-coverage.js'));
     t.regex((await result).stdout, /1 passing/);
